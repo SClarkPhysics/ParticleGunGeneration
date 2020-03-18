@@ -1,0 +1,3 @@
+*.pyc
+*.log
+/CMSSW_8_0_25/src/aGun_Generation/crab_projects
