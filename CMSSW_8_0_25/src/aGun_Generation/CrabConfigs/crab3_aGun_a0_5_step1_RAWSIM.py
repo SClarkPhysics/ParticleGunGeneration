@@ -9,7 +9,8 @@ aMass = "0_5"
 pwd = os.getcwd()
 usn = getpass.getuser()
 
-outlfnd = "/store/user/{}/aGun_Generation/a{}".format(usn, aMass) 
+#outlfnd = "/store/user/{}/aGun_Generation/a{}".format(usn, aMass) 
+outlfnd = "/store/local/aGun_Generation/a{}".format(aMass) 
 
 config.General.requestName = 'aGun_a{}_RAWSIM'.format(aMass)
 config.General.workArea = '{}/crab_projects'.format(pwd)

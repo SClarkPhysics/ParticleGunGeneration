@@ -34,10 +34,10 @@ process.maxEvents = cms.untracked.PSet(
 
 # Input source
 fname = "/eos/uscms/store/user/stclark/aGun_lowE/a1/aGun_lowE/Moriond17_RAWSIM/200223_000135/0000/RAWSIM_OUTPUT_aGun_a1_17.root"
-aMass = 0.5
-ptmin = 10*aMass
-ptmax = 100*aMass
 
+aMass = 0.5
+eMin = 10*aMass
+eMax = 100*aMass
 
 process.source = cms.Source("PoolSource",
     fileNames =
@@ -71,7 +71,8 @@ process.AODSIMoutput = cms.OutputModule("PoolOutputModule",
     outputCommands = process.AODSIMEventContent.outputCommands
 )
 
-outfname = 'aGun_a{}_pt{}to{}_MINIAOD.root'.format(str(aMass).replace(".",","), str(ptmin).replace(".",","), str(ptmax).replace(".",","))
+outfname = 'aGun_a{}_E{}to{}_MINIAOD.root'.format(str(aMass).replace(".",","), str(eMin).replace(".",","), str(eMax).replace(".",","))
+
 process.MINIAODSIMoutput = cms.OutputModule("PoolOutputModule",
     compressionAlgorithm = cms.untracked.string('LZMA'),
     compressionLevel = cms.untracked.int32(4),

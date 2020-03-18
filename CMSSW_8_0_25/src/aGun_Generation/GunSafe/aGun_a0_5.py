@@ -28,11 +28,11 @@ process.load('Configuration.StandardSequences.SimIdeal_cff')
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
-nevents = 10
+nevents = 100
 
 aMass = 0.5
-ptMin = 10 * aMass
-ptMax = 100 * aMass
+eMin = 10 * aMass
+eMax = 100 * aMass
 
 process.maxEvents = cms.untracked.PSet(
     input = cms.untracked.int32(nevents)
@@ -55,7 +55,7 @@ process.configurationMetadata = cms.untracked.PSet(
 # Output definition
 
 
-foutName = "aGun_a{}_pt{}to{}.root".format(str(aMass).replace(".","_"), str(ptMin).replace(".","_"), str(ptMax).replace(".","_"))
+foutName = "aGun_a{}_E{}to{}.root".format(str(aMass).replace(".","_"), str(eMin).replace(".","_"), str(eMax).replace(".","_"))
 
 process.RAWSIMoutput = cms.OutputModule("PoolOutputModule",
     SelectEvents = cms.untracked.PSet(
@@ -79,17 +79,17 @@ process.genstepfilter.triggerConditions=cms.vstring("generation_step")
 from Configuration.AlCa.GlobalTag import GlobalTag
 process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:mc', '')
 
-process.generator = cms.EDFilter("Pythia8PtGun",
+process.generator = cms.EDFilter("Pythia8EGun",
     PGunParameters = cms.PSet(
         AddAntiParticle = cms.bool(False),
         
         ParticleID = cms.vint32(25),
 
-        MinPt = cms.double(ptMin),
-        MaxPt = cms.double(ptMax),
+        MinE = cms.double(eMin),
+        MaxE = cms.double(eMax),
 
-        MinEta = cms.double(-3.),
-        MaxEta = cms.double(3.),
+        MinEta = cms.double(-1.4),
+        MaxEta = cms.double(1.4),
 
         MinPhi = cms.double(-3.14159265359),
         MaxPhi = cms.double(3.14159265359)

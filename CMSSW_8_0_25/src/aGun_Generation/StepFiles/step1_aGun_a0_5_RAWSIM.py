@@ -35,10 +35,10 @@ process.maxEvents = cms.untracked.PSet(
 
 # Input source
 fname = "/eos/uscms/store/user/stclark/aGun_lowE/a1/aGun_lowE/GENSIM_Moriond17/200221_162949/0000/aGun_a1_pt10to1000_1.root"
-aMass = 0.5
-ptmin = 10*aMass
-ptmax = 100*aMass
 
+aMass = 0.5
+eMin = 10*aMass
+eMax = 100*aMass
 
 process.source = cms.Source("PoolSource",
 		    dropDescendantsOfDroppedBranches = cms.untracked.bool(False),
@@ -77,13 +77,15 @@ process.configurationMetadata = cms.untracked.PSet(
 
 # Output definition
 
+foutName = "RAWSIM_OUTPUT_aGun_a{}_E{}to{}.root".format(str(aMass).replace(".","_"), str(eMin).replace(".","_"),str(eMax).replace(".","_"))
+
 process.RAWSIMoutput = cms.OutputModule("PoolOutputModule",
 		    dataset = cms.untracked.PSet(
 			            dataTier = cms.untracked.string('GEN-SIM-RAW'),
 				            filterName = cms.untracked.string('')
 					        ),
 		        eventAutoFlushCompressedSize = cms.untracked.int32(5242880),
-			    fileName = cms.untracked.string("RAWSIM_OUTPUT_aGun_a{}.root".format(str(aMass).replace(".","_"))),
+			    fileName = cms.untracked.string(foutname),
 			        outputCommands = process.RAWSIMEventContent.outputCommands,
 				    splitLevel = cms.untracked.int32(0)
 				    )
